@@ -34,4 +34,45 @@ class Expense extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public static function getCategoryOptions(): array
+    {
+        return [
+            'software' => '💻 Software & Licenses',
+            'hardware' => '🖥️ Hardware',
+            'hosting' => '☁️ Hosting & Servers',
+            'domain' => '🌐 Domains',
+            'marketing' => '📢 Marketing & Ads',
+            'travel' => '✈️ Travel',
+            'office' => '🏢 Office Supplies',
+            'subscription' => '🔄 Subscriptions',
+            'freelancer' => '👤 Freelancer/Contractor',
+            'training' => '📚 Training & Education',
+            'insurance' => '🛡️ Insurance',
+            'utilities' => '💡 Utilities',
+            'other' => '📦 Other',
+        ];
+    }
+
+    // ── Scopes ──
+
+    public function scopeApproved($query)
+    {
+        return $query->where('status', 'approved');
+    }
+
+    public function scopeByCategory($query, string $category)
+    {
+        return $query->where('category', $category);
+    }
+
+    public function scopeThisMonth($query)
+    {
+        return $query->whereYear('date', now()->year)->whereMonth('date', now()->month);
+    }
+
+    public function scopeThisYear($query)
+    {
+        return $query->whereYear('date', now()->year);
+    }
 }

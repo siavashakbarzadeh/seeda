@@ -17,30 +17,34 @@ class ExpenseResource extends Resource
     protected static ?string $navigationGroup = 'Business';
     protected static ?int $navigationSort = 5;
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('status', 'pending')->count() ?: null;
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\Section::make('Expense Details')->schema([
                 Forms\Components\TextInput::make('description')
-                    ->required()->maxLength(255),
+                    ->required()->maxLength(255)->columnSpanFull(),
                 Forms\Components\TextInput::make('amount')
                     ->numeric()->required()->prefix('€'),
                 Forms\Components\Select::make('category')
-                    ->options([
-                        'software' => '💻 Software',
-                        'hardware' => '🖥️ Hardware',
-                        'hosting' => '☁️ Hosting',
-                        'domain' => '🌐 Domain',
-                        'marketing' => '📢 Marketing',
-                        'travel' => '✈️ Travel',
-                        'office' => '🏢 Office',
-                        'subscription' => '🔄 Subscription',
-                        'freelancer' => '👤 Freelancer',
-                        'other' => '📦 Other',
-                    ])->default('other')->required(),
+                    ->options(Expense::getCategoryOptions())
+                    ->default('other')->required()->searchable(),
                 Forms\Components\Select::make('project_id')
                     ->relationship('project', 'name')
                     ->searchable()->preload()->placeholder('No project'),
+                Forms\Components\Select::make('user_id')
+                    ->relationship('user', 'name')
+                    ->default(fn() => auth()->id())
+                    ->required(),
                 Forms\Components\DatePicker::make('date')
                     ->required()->default(now()),
                 Forms\Components\Select::make('status')
@@ -53,9 +57,9 @@ class ExpenseResource extends Resource
                 Forms\Components\Toggle::make('is_reimbursable')
                     ->inline(),
                 Forms\Components\FileUpload::make('receipt_path')
-                    ->label('Receipt')
+                    ->label('Receipt / Proof')
                     ->directory('receipts')
-                    ->image()
+                    ->acceptedFileTypes(['image/*', 'application/pdf'])
                     ->maxSize(5120),
             ])->columns(2),
         ]);
@@ -68,9 +72,12 @@ class ExpenseResource extends Resource
                 Tables\Columns\TextColumn::make('date')->date()->sortable(),
                 Tables\Columns\TextColumn::make('description')->searchable()->limit(35),
                 Tables\Columns\TextColumn::make('category')
-                    ->badge()->color('gray'),
+                    ->badge()
+                    ->formatStateUsing(fn($state) => Expense::getCategoryOptions()[$state] ?? $state),
                 Tables\Columns\TextColumn::make('project.name')
-                    ->default('—'),
+                    ->default('—')->toggleable(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('By'),
                 Tables\Columns\TextColumn::make('amount')
                     ->money('EUR')->sortable()->weight('bold'),
                 Tables\Columns\TextColumn::make('status')
@@ -82,24 +89,59 @@ class ExpenseResource extends Resource
                         'info' => 'reimbursed',
                     ]),
                 Tables\Columns\IconColumn::make('is_reimbursable')->boolean(),
+                Tables\Columns\IconColumn::make('receipt_path')
+                    ->label('📎')
+                    ->icon(fn($state) => $state ? 'heroicon-s-paper-clip' : 'heroicon-o-minus')
+                    ->color(fn($state) => $state ? 'success' : 'gray'),
             ])
             ->defaultSort('date', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
+
+                Tables\Actions\Action::make('approve')
+                    ->icon('heroicon-o-check')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->action(fn(Expense $record) => $record->update(['status' => 'approved']))
+                    ->hidden(fn(Expense $record) => $record->status !== 'pending'),
+
+                Tables\Actions\Action::make('reject')
+                    ->icon('heroicon-o-x-mark')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->action(fn(Expense $record) => $record->update(['status' => 'rejected']))
+                    ->hidden(fn(Expense $record) => $record->status !== 'pending'),
+
+                Tables\Actions\Action::make('reimburse')
+                    ->icon('heroicon-o-banknotes')
+                    ->color('info')
+                    ->requiresConfirmation()
+                    ->action(fn(Expense $record) => $record->update(['status' => 'reimbursed']))
+                    ->hidden(fn(Expense $record) => !($record->status === 'approved' && $record->is_reimbursable)),
+
                 Tables\Actions\DeleteAction::make(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')
-                    ->options([
-                        'software' => 'Software',
-                        'hardware' => 'Hardware',
-                        'hosting' => 'Hosting',
-                        'domain' => 'Domain',
-                        'marketing' => 'Marketing',
-                        'subscription' => 'Subscription',
-                    ]),
+                    ->options(Expense::getCategoryOptions()),
                 Tables\Filters\SelectFilter::make('status')
-                    ->options(['pending' => 'Pending', 'approved' => 'Approved', 'rejected' => 'Rejected']),
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                        'reimbursed' => 'Reimbursed',
+                    ]),
+                Tables\Filters\SelectFilter::make('project')
+                    ->relationship('project', 'name'),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\BulkAction::make('bulk_approve')
+                    ->label('Approve Selected')
+                    ->icon('heroicon-o-check')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->action(fn($records) => $records->each->update(['status' => 'approved'])),
             ]);
     }
 
