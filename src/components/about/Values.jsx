@@ -12,8 +12,8 @@ const VALUES = [
     {
         icon: Users,
         title: 'Client Partnership',
-        desc: 'We treat every project like it's our own.Transparent communication at every step.',
-  },
+        desc: "We treat every project like it's our own. Transparent communication at every step.",
+    },
     {
         icon: Zap,
         title: 'Technical Excellence',
