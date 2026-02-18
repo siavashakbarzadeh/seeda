@@ -1,14 +1,20 @@
-import { Check } from 'lucide-react';
-import * as LucideIcons from 'lucide-react';
+import { Check, Code2, Lightbulb, BrainCircuit, Cloud, Palette } from 'lucide-react';
 import Card from '../ui/Card';
 import styles from './ServiceCard.module.css';
 
+const ICONS = {
+    Code2,
+    Lightbulb,
+    BrainCircuit,
+    Cloud,
+    Palette
+};
+
 /**
  * ServiceCard — renders a single service with icon, description, and feature list.
- * Icons are resolved dynamically from the icon name in services.json.
  */
 export default function ServiceCard({ service }) {
-    const IconComponent = LucideIcons[service.icon] || LucideIcons.Code2;
+    const IconComponent = ICONS[service.icon] || Code2;
 
     return (
         <Card className={styles.serviceCard}>
