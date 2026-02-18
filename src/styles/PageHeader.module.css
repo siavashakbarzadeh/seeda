@@ -1,0 +1,16 @@
+.pageHeader {
+    padding: var(--space-4xl) 0 var(--space-2xl);
+    background: linear-gradient(135deg, var(--white) 0%, var(--primary-bg) 100%);
+    text-align: center;
+}
+
+.pageHeader h1 {
+    margin-bottom: var(--space-md);
+}
+
+.pageHeader p {
+    font-size: var(--font-size-lg);
+    color: var(--neutral-600);
+    max-width: 560px;
+    margin: 0 auto;
+}

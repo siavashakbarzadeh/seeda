@@ -1,0 +1,257 @@
+.hero {
+    position: relative;
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--white) 0%, var(--primary-bg) 100%);
+}
+
+.heroContent {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4xl);
+    align-items: center;
+}
+
+.heroText {
+    max-width: 560px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--white);
+    border: 1px solid var(--neutral-200);
+    border-radius: 100px;
+    padding: 0.4rem 1rem 0.4rem 0.5rem;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--neutral-700);
+    margin-bottom: var(--space-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.badgeDot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.heroTitle {
+    font-size: var(--font-size-5xl);
+    line-height: 1.08;
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.03em;
+}
+
+.heroHighlight {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroSubtitle {
+    font-size: var(--font-size-lg);
+    color: var(--neutral-600);
+    line-height: 1.7;
+    margin-bottom: var(--space-2xl);
+    max-width: 480px;
+}
+
+.heroCtas {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.heroStats {
+    display: flex;
+    gap: var(--space-3xl);
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--neutral-200);
+}
+
+.stat h3 {
+    font-size: var(--font-size-3xl);
+    color: var(--primary);
+    margin-bottom: var(--space-xs);
+}
+
+.stat p {
+    font-size: var(--font-size-sm);
+    color: var(--neutral-400);
+    margin: 0;
+}
+
+/* Right side visual */
+.heroVisual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroGraphic {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    opacity: 0.08;
+    position: relative;
+}
+
+.heroGraphic::before {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border-radius: 50%;
+    border: 2px dashed var(--primary);
+    opacity: 0.3;
+    animation: spin 30s linear infinite;
+}
+
+.heroGraphic::after {
+    content: '';
+    position: absolute;
+    inset: 80px;
+    border-radius: 50%;
+    background: var(--primary);
+    opacity: 0.15;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Float cards on the visual */
+.floatCard {
+    position: absolute;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    z-index: 3;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floatCard:nth-child(2) {
+    top: 15%;
+    right: 0;
+    animation-delay: 0s;
+}
+
+.floatCard:nth-child(3) {
+    bottom: 25%;
+    left: -10%;
+    animation-delay: 2s;
+}
+
+.floatCard:nth-child(4) {
+    bottom: 8%;
+    right: 5%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.floatIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.floatCard h4 {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.floatCard p {
+    font-size: var(--font-size-xs);
+    color: var(--neutral-400);
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .heroContent {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+    }
+
+    .heroVisual {
+        display: none;
+    }
+
+    .heroText {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .heroSubtitle {
+        max-width: 100%;
+    }
+
+    .heroCtas {
+        justify-content: center;
+    }
+
+    .heroStats {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .heroStats {
+        flex-direction: column;
+        gap: var(--space-lg);
+        align-items: center;
+    }
+
+    .stat {
+        text-align: center;
+    }
+}

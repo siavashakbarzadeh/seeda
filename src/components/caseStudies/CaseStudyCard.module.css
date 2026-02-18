@@ -1,0 +1,104 @@
+.caseStudyCard {
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.visual {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.visualPattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.12) 0%, transparent 50%);
+}
+
+.visualText {
+    position: relative;
+    z-index: 1;
+    color: var(--white);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    padding: 0 var(--space-lg);
+    text-align: center;
+}
+
+.body {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.category {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-bg);
+    padding: 0.2rem 0.625rem;
+    border-radius: 100px;
+    margin-bottom: var(--space-sm);
+}
+
+.title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+}
+
+.excerpt {
+    font-size: var(--font-size-sm);
+    color: var(--neutral-600);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+    flex: 1;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.tag {
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--neutral-600);
+    background: var(--neutral-100);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+}
+
+.results {
+    border-top: 1px solid var(--neutral-100);
+    padding-top: var(--space-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+}
+
+.result {
+    font-size: var(--font-size-xs);
+    color: var(--neutral-600);
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.resultIcon {
+    color: var(--primary);
+    flex-shrink: 0;
+}

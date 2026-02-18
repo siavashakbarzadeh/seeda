@@ -1,0 +1,69 @@
+.teamCard {
+    text-align: center;
+    padding: var(--space-2xl);
+}
+
+.avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 0 auto var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.avatar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    transition: border-color var(--transition-base);
+}
+
+.teamCard:hover .avatar::after {
+    border-color: var(--primary);
+}
+
+.name {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+
+.role {
+    font-size: var(--font-size-sm);
+    color: var(--primary);
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+}
+
+.bio {
+    font-size: var(--font-size-sm);
+    color: var(--neutral-600);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+}
+
+.socialLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--neutral-100);
+    color: var(--neutral-600);
+    transition: all var(--transition-fast);
+}
+
+.socialLink:hover {
+    background: var(--primary);
+    color: var(--white);
+}

@@ -1,0 +1,86 @@
+[
+    {
+        "id": "fintech-platform",
+        "title": "FinPay — Digital Banking Platform",
+        "category": "FinTech",
+        "tags": [
+            "React",
+            "Node.js",
+            "AWS",
+            "PostgreSQL"
+        ],
+        "excerpt": "Built a real-time digital banking platform handling 50K+ daily transactions with sub-200ms response times and PCI-DSS compliance.",
+        "challenge": "The client needed a secure, high-performance platform that could process thousands of concurrent transactions while meeting strict financial regulations.",
+        "solution": "We designed a microservices architecture on AWS with event-driven processing, real-time fraud detection, and an intuitive React dashboard for both customers and back-office teams.",
+        "results": [
+            "50K+ daily transactions processed",
+            "99.99% uptime in first year",
+            "40% reduction in operational costs",
+            "PCI-DSS Level 1 certified"
+        ],
+        "color": "#16A34A"
+    },
+    {
+        "id": "healthcare-ai",
+        "title": "MediScan — AI Diagnostic Assistant",
+        "category": "Healthcare",
+        "tags": [
+            "Python",
+            "TensorFlow",
+            "React",
+            "GCP"
+        ],
+        "excerpt": "Developed an AI-powered diagnostic tool that helps radiologists detect anomalies 3x faster with 97% accuracy, processing 10K+ scans monthly.",
+        "challenge": "Radiologists were overwhelmed by increasing scan volumes, leading to longer wait times and higher risk of missed diagnoses.",
+        "solution": "We trained a deep learning model on 500K+ annotated medical images and built an intuitive interface that highlights potential anomalies, enabling radiologists to focus on critical cases.",
+        "results": [
+            "97% detection accuracy",
+            "3x faster diagnosis workflow",
+            "10K+ scans processed monthly",
+            "Deployed across 12 hospitals"
+        ],
+        "color": "#2563EB"
+    },
+    {
+        "id": "logistics-saas",
+        "title": "RouteIQ — Logistics Optimization",
+        "category": "Logistics",
+        "tags": [
+            "Next.js",
+            "Python",
+            "Kubernetes",
+            "ML"
+        ],
+        "excerpt": "Created an intelligent route optimization platform that reduced delivery times by 25% and fuel costs by 18% for a fleet of 500+ vehicles.",
+        "challenge": "A major logistics provider was losing millions annually due to inefficient routing and poor real-time visibility across their fleet.",
+        "solution": "We built a real-time optimization engine using machine learning that dynamically adjusts routes based on traffic, weather, and delivery priorities — integrated with existing ERP systems.",
+        "results": [
+            "25% faster deliveries",
+            "18% reduction in fuel costs",
+            "$2.4M annual savings",
+            "Real-time fleet tracking for 500+ vehicles"
+        ],
+        "color": "#9333EA"
+    },
+    {
+        "id": "ecommerce-replatform",
+        "title": "NordShop — E-Commerce Replatform",
+        "category": "E-Commerce",
+        "tags": [
+            "React",
+            "GraphQL",
+            "Shopify",
+            "Vercel"
+        ],
+        "excerpt": "Re-platformed a legacy e-commerce site to a headless architecture, boosting page speed by 60% and increasing conversion rates by 35%.",
+        "challenge": "The client's monolithic e-commerce platform was slow, difficult to maintain, and unable to support their rapid growth across global markets.",
+        "solution": "We migrated to a headless architecture with React Storefront on Vercel, connected to Shopify for commerce, and implemented a CDN-first strategy with edge caching.",
+        "results": [
+            "60% improvement in page speed",
+            "35% increase in conversion rate",
+            "Expanded to 8 international markets",
+            "Mobile revenue up 45%"
+        ],
+        "color": "#EA580C"
+    }
+]

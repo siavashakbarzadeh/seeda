@@ -1,0 +1,43 @@
+.trustStrip {
+    padding: var(--space-3xl) 0;
+    background: var(--neutral-50);
+    border-top: 1px solid var(--neutral-200);
+    border-bottom: 1px solid var(--neutral-200);
+}
+
+.label {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--neutral-400);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    margin-bottom: var(--space-xl);
+}
+
+.logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4xl);
+    flex-wrap: wrap;
+}
+
+.logoItem {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--neutral-300);
+    letter-spacing: -0.02em;
+    transition: color var(--transition-base);
+    user-select: none;
+}
+
+.logoItem:hover {
+    color: var(--neutral-500);
+}
+
+@media (max-width: 640px) {
+    .logos {
+        gap: var(--space-2xl);
+    }
+}

@@ -1,0 +1,44 @@
+[
+    {
+        "id": "alex-morgan",
+        "name": "Alex Morgan",
+        "role": "Founder & CEO",
+        "bio": "15+ years leading digital transformation projects. Passionate about building technology that creates lasting business impact.",
+        "linkedin": "#"
+    },
+    {
+        "id": "sarah-chen",
+        "name": "Sarah Chen",
+        "role": "CTO",
+        "bio": "Full-stack architect with deep expertise in cloud-native systems, microservices, and scaling high-traffic platforms.",
+        "linkedin": "#"
+    },
+    {
+        "id": "marco-rossi",
+        "name": "Marco Rossi",
+        "role": "Lead Developer",
+        "bio": "React and Node.js specialist. Advocates for clean code, test-driven development, and developer experience.",
+        "linkedin": "#"
+    },
+    {
+        "id": "emma-nakamura",
+        "name": "Emma Nakamura",
+        "role": "Data & AI Lead",
+        "bio": "Machine learning engineer with experience in NLP, computer vision, and deploying ML models at scale in production.",
+        "linkedin": "#"
+    },
+    {
+        "id": "david-kim",
+        "name": "David Kim",
+        "role": "UX Designer",
+        "bio": "Human-centered designer focused on creating intuitive digital experiences. Background in psychology and interaction design.",
+        "linkedin": "#"
+    },
+    {
+        "id": "lisa-weber",
+        "name": "Lisa Weber",
+        "role": "Project Manager",
+        "bio": "Certified PMP with a knack for keeping complex projects on track. Bridges the gap between tech teams and business stakeholders.",
+        "linkedin": "#"
+    }
+]

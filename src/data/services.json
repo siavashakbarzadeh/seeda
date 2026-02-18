@@ -1,0 +1,72 @@
+[
+    {
+        "id": "software-development",
+        "icon": "Code2",
+        "title": "Software Development",
+        "subtitle": "Custom-built solutions that scale",
+        "description": "We design and build modern web and mobile applications from the ground up. Our team delivers clean, maintainable code using cutting-edge technologies — from React and Node.js to cloud-native architectures.",
+        "features": [
+            "Full-stack web applications",
+            "Mobile apps (React Native, Flutter)",
+            "API design & microservices",
+            "Cloud-native & serverless solutions",
+            "Legacy system modernization"
+        ]
+    },
+    {
+        "id": "consulting",
+        "icon": "Lightbulb",
+        "title": "Technology Consulting",
+        "subtitle": "Strategic guidance for digital growth",
+        "description": "We help businesses make smarter technology decisions. From architecture reviews and tech-stack evaluations to digital transformation roadmaps, we bring clarity to complex challenges.",
+        "features": [
+            "Architecture & code reviews",
+            "Technology stack evaluation",
+            "Digital transformation strategy",
+            "Process optimization",
+            "Team augmentation & mentoring"
+        ]
+    },
+    {
+        "id": "data-ai",
+        "icon": "BrainCircuit",
+        "title": "Data & AI Solutions",
+        "subtitle": "Turn your data into a competitive edge",
+        "description": "We build intelligent systems that extract value from your data. From analytics dashboards to machine learning models, we help you make data-driven decisions with confidence.",
+        "features": [
+            "Data pipeline engineering",
+            "Business intelligence & dashboards",
+            "Machine learning models",
+            "Natural language processing",
+            "Predictive analytics"
+        ]
+    },
+    {
+        "id": "devops",
+        "icon": "Cloud",
+        "title": "DevOps & Cloud",
+        "subtitle": "Infrastructure that works for you",
+        "description": "We design and manage cloud infrastructure that's reliable, scalable, and cost-effective. Our DevOps practices ensure your applications are deployed smoothly and monitored around the clock.",
+        "features": [
+            "CI/CD pipeline design",
+            "Cloud architecture (AWS, GCP, Azure)",
+            "Container orchestration (Docker, K8s)",
+            "Infrastructure as Code",
+            "Monitoring & incident response"
+        ]
+    },
+    {
+        "id": "uiux-design",
+        "icon": "Palette",
+        "title": "UI/UX Design",
+        "subtitle": "Experiences people love to use",
+        "description": "We create intuitive, beautiful interfaces grounded in user research. Our design process ensures your product is not just usable but delightful — driving engagement and loyalty.",
+        "features": [
+            "User research & personas",
+            "Wireframing & prototyping",
+            "Visual design systems",
+            "Usability testing",
+            "Design-to-code handoff"
+        ]
+    }
+]
