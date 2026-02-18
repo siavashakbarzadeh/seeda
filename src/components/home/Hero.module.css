@@ -216,6 +216,11 @@
     margin: 0;
 }
 
+.floatIndicator {
+    position: absolute;
+    z-index: 4;
+}
+
 @media (max-width: 1024px) {
     .heroContent {
         grid-template-columns: 1fr;

@@ -65,7 +65,7 @@ export default function CaseStudiesPage() {
                     {/* Cards grid */}
                     <div className="grid grid--2">
                         {filtered.map((study, i) => (
-                            <ScrollReveal key={study.id} delay={(i % 2) + 1}>
+                            <ScrollReveal key={study.id} className="zoom-in" delay={(i % 2) + 1}>
                                 <CaseStudyCard study={study} />
                             </ScrollReveal>
                         ))}

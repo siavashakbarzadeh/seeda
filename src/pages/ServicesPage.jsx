@@ -23,7 +23,7 @@ export default function ServicesPage() {
                 <div className="container">
                     <div className="grid grid--2" style={{ gap: 'var(--space-2xl)' }}>
                         {services.map((service, i) => (
-                            <ScrollReveal key={service.id} delay={(i % 2) + 1}>
+                            <ScrollReveal key={service.id} className="zoom-in" delay={(i % 2) + 1}>
                                 <ServiceCard service={service} />
                             </ScrollReveal>
                         ))}

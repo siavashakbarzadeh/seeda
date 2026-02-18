@@ -57,7 +57,7 @@ export default function AboutPage() {
                     </ScrollReveal>
                     <div className="grid grid--3">
                         {team.map((member, i) => (
-                            <ScrollReveal key={member.id} delay={(i % 3) + 1}>
+                            <ScrollReveal key={member.id} className="zoom-in" delay={(i % 3) + 1}>
                                 <TeamMemberCard member={member} index={i} />
                             </ScrollReveal>
                         ))}

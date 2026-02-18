@@ -82,5 +82,89 @@
             "Mobile revenue up 45%"
         ],
         "color": "#EA580C"
+    },
+    {
+        "id": "iran-lobby",
+        "title": "Iran Lobby — Advocacy PWA",
+        "category": "Mobile / PWA",
+        "tags": [
+            "Next.js",
+            "PWA",
+            "Node.js",
+            "i18n"
+        ],
+        "excerpt": "A full-stack Progressive Web App built to facilitate political advocacy, featuring offline support, RTL/LTR toggle, and real-time mission tracking.",
+        "challenge": "Advocates needed a reliable, accessible tool that works even in low-connectivity areas and supports multiple languages and scripts.",
+        "solution": "We developed a high-performant PWA with a custom service worker for offline functionality and a granular localization system for seamless RTL support.",
+        "results": [
+            "100% Lighthouse PWA score",
+            "Zero-latency offline access",
+            "20K+ active advocacy missions",
+            "Bilingual (En/Fa) support"
+        ],
+        "color": "#059669"
+    },
+    {
+        "id": "fasting-app",
+        "title": "FastingApp — Health Companion",
+        "category": "Mobile",
+        "tags": [
+            "React Native",
+            "Laravel",
+            "Firebase",
+            "PWA"
+        ],
+        "excerpt": "An intermittent fasting tracker with personalized coaching, cross-platform sync, and gamified health streaks.",
+        "challenge": "Users struggled with complex health trackers. The goal was to create a minimalist, habit-forming experience with real-time feedback.",
+        "solution": "Built a clean mobile-first experience with custom charting and notification systems to drive daily engagement and consistency.",
+        "results": [
+            "4.8/5 average user rating",
+            "65% month-1 retention rate",
+            "Interactive habit coaching",
+            "Cross-device data sync"
+        ],
+        "color": "#F59E0B"
+    },
+    {
+        "id": "energy-ds",
+        "title": "EnergyFlow — Predictive Maintenance",
+        "category": "Data Science",
+        "tags": [
+            "Python",
+            "Scikit-Learn",
+            "PowerBI",
+            "AWS"
+        ],
+        "excerpt": "Machine learning model that predicts industrial equipment failure up to 48 hours in advance, reducing downtime by 30%.",
+        "challenge": "Unplanned downtime in manufacturing was costing millions. Sensor data was available but not leveraged for predictive insights.",
+        "solution": "Developed a custom anomaly detection pipeline that processes real-time sensor streams and alerts maintenance teams before failures occur.",
+        "results": [
+            "30% reduction in downtime",
+            "92% prediction recall",
+            "Real-time sensor monitoring",
+            "Automated alert system"
+        ],
+        "color": "#7C3AED"
+    },
+    {
+        "id": "sentiment-ds",
+        "title": "Pulse — Sentiment AI",
+        "category": "Data Science",
+        "tags": [
+            "PyTorch",
+            "HuggingFace",
+            "React",
+            "FastAPI"
+        ],
+        "excerpt": "Advanced NLP platform that analyzes customer feedback across all social channels in real-time, providing actionable sentiment scores.",
+        "challenge": "Marketing teams were manually reading thousands of comments. They needed a way to spot negative trends instantly.",
+        "solution": "We fine-tuned a transformer model and built a real-time dashboard that categorizes feedback into categories and triggers alerts for rapid response.",
+        "results": [
+            "Instant trend detection",
+            "95% accuracy in sentiment",
+            "Reduced response time by 80%",
+            "Integration with 10+ social APIs"
+        ],
+        "color": "#EC4899"
     }
 ]

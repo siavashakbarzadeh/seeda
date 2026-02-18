@@ -8,9 +8,13 @@ export default function HomePage() {
     return (
         <>
             <Hero />
-            <ServicesPreview />
+            <ScrollReveal className="zoom-in">
+                <ServicesPreview />
+            </ScrollReveal>
             <TrustStrip />
-            <FeaturedCaseStudy />
+            <ScrollReveal className="zoom-in">
+                <FeaturedCaseStudy />
+            </ScrollReveal>
             <CtaSection />
         </>
     );

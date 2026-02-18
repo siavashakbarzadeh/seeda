@@ -47,8 +47,8 @@ export default function Hero() {
 
                 {/* Right — Visual */}
                 <div className={styles.heroVisual}>
-                    <div className={styles.heroGraphic}></div>
-                    <div className={styles.floatCard}>
+                    <div className={`${styles.heroGraphic} animate-pulse`}></div>
+                    <div className={`${styles.floatCard}`}>
                         <div className={styles.floatIcon} style={{ background: '#ECFDF5', color: '#16A34A' }}>
                             <Code2 size={22} />
                         </div>
@@ -57,7 +57,7 @@ export default function Hero() {
                             <p>Maintainable & scalable</p>
                         </div>
                     </div>
-                    <div className={styles.floatCard}>
+                    <div className={`${styles.floatCard}`}>
                         <div className={styles.floatIcon} style={{ background: '#EFF6FF', color: '#2563EB' }}>
                             <BrainCircuit size={22} />
                         </div>
@@ -66,7 +66,7 @@ export default function Hero() {
                             <p>Smart data solutions</p>
                         </div>
                     </div>
-                    <div className={styles.floatCard}>
+                    <div className={`${styles.floatCard}`}>
                         <div className={styles.floatIcon} style={{ background: '#FEF3C7', color: '#D97706' }}>
                             <Rocket size={22} />
                         </div>
@@ -74,6 +74,13 @@ export default function Hero() {
                             <h4>Fast Delivery</h4>
                             <p>Agile methodology</p>
                         </div>
+                    </div>
+                    {/* Add more floating icons for extra "wow" */}
+                    <div className={styles.floatIndicator} style={{ top: '60%', left: '80%', animationDelay: '1s' }}>
+                        <div className="animate-float" style={{ background: 'var(--primary)', width: 12, height: 12, borderRadius: '50%' }}></div>
+                    </div>
+                    <div className={styles.floatIndicator} style={{ top: '20%', left: '10%', animationDelay: '3s' }}>
+                        <div className="animate-float" style={{ background: '#2563EB', width: 8, height: 8, borderRadius: '50%' }}></div>
                     </div>
                 </div>
             </div>
