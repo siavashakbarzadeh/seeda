@@ -144,45 +144,76 @@
         </div>
     </section>
 
-    {{-- Featured Case Study --}}
-    @if ($featuredStudy)
+    {{-- Portfolio Showcase --}}
+    @php
+        $portfolioStudies = \App\Models\CaseStudy::active()->featured()->take(4)->get();
+    @endphp
+    @if ($portfolioStudies->isNotEmpty())
         <section class="py-16 md:py-24 bg-neutral-50">
             <div class="max-w-[1200px] mx-auto px-4 md:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div class="fade-in-left">
-                        <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden"
-                            style="background: {{ $featuredStudy->color }}20;">
-                            <div class="w-full h-full flex items-center justify-center text-6xl font-bold"
-                                style="color: {{ $featuredStudy->color }};">
-                                {{ substr($featuredStudy->title, 0, 2) }}
+                <div class="text-center mb-12 fade-in">
+                    <span class="text-sm font-semibold text-primary uppercase tracking-wider">Portfolio</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-4">Our Recent Work</h2>
+                    <div class="w-12 h-1 bg-primary rounded-full mx-auto mb-4"></div>
+                    <p class="text-neutral-600 max-w-xl mx-auto">Real projects we've built for real clients — from restaurant platforms to enterprise management suites.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    @foreach($portfolioStudies as $i => $study)
+                        <div class="zoom-in stagger-{{ ($i % 2) + 1 }} bg-white rounded-2xl border border-neutral-100 overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-400 group">
+                            {{-- Thumbnail / Color Header --}}
+                            @if($study->thumbnail)
+                                <div class="w-full aspect-[16/9] overflow-hidden">
+                                    <img src="{{ asset('storage/' . $study->thumbnail) }}" alt="{{ $study->title }}"
+                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                            @else
+                                <div class="w-full aspect-[16/9] flex items-center justify-center" style="background: {{ $study->color }}15;">
+                                    <span class="text-5xl font-bold" style="color: {{ $study->color }};">{{ substr($study->title, 0, 2) }}</span>
+                                </div>
+                            @endif
+
+                            <div class="p-6">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="px-3 py-1 rounded-full text-xs font-semibold text-white" style="background: {{ $study->color }};">
+                                        {{ $study->category }}
+                                    </span>
+                                    @if($study->client_name)
+                                        <span class="text-xs text-neutral-400">{{ $study->client_name }}</span>
+                                    @endif
+                                </div>
+
+                                <h3 class="text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary transition-colors">{{ $study->title }}</h3>
+                                <p class="text-neutral-600 text-sm leading-relaxed mb-4">{{ $study->excerpt }}</p>
+
+                                {{-- Tags --}}
+                                <div class="flex flex-wrap gap-1.5 mb-4">
+                                    @foreach (array_slice($study->tags ?? [], 0, 4) as $tag)
+                                        <span class="px-2 py-0.5 bg-neutral-50 text-neutral-500 text-xs font-medium rounded-md border border-neutral-100">{{ $tag }}</span>
+                                    @endforeach
+                                </div>
+
+                                {{-- Results --}}
+                                <div class="grid grid-cols-2 gap-2">
+                                    @foreach (array_slice($study->results ?? [], 0, 2) as $result)
+                                        <div class="bg-neutral-50 rounded-lg px-3 py-2 border border-neutral-100">
+                                            <p class="text-xs font-semibold text-neutral-800">✓ {{ $result }}</p>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="fade-in-right">
-                        <span class="text-sm font-semibold text-primary uppercase tracking-wider">Featured Project</span>
-                        <h2 class="text-3xl font-bold mt-3 mb-4">{{ $featuredStudy->title }}</h2>
-                        <p class="text-neutral-600 mb-6 leading-relaxed">{{ $featuredStudy->excerpt }}</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            @foreach ($featuredStudy->tags ?? [] as $tag)
-                                <span
-                                    class="px-3 py-1 bg-neutral-100 text-neutral-600 text-xs font-medium rounded-full">{{ $tag }}</span>
-                            @endforeach
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 mb-8">
-                            @foreach (array_slice($featuredStudy->results ?? [], 0, 4) as $result)
-                                <div class="bg-white rounded-xl p-4 border border-neutral-100">
-                                    <p class="text-sm font-semibold text-neutral-900">{{ $result }}</p>
-                                </div>
-                            @endforeach
-                        </div>
-                        <a href="{{ route('case-studies') }}"
-                            class="inline-flex items-center text-primary font-semibold hover:gap-3 transition-all gap-2">
-                            View All Projects
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                    </div>
+                    @endforeach
+                </div>
+
+                <div class="text-center mt-12 fade-in">
+                    <a href="{{ route('case-studies') }}"
+                        class="inline-flex items-center px-7 py-3.5 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 gap-2">
+                        View All Projects
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>

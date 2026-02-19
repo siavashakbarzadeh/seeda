@@ -19,13 +19,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // ── Admin User ──
-        User::create([
-            'name' => 'Seeda Admin',
-            'email' => 'admin@seeda.dev',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-            'is_active' => true,
-        ]);
+        $admin = User::updateOrCreate(
+            ['email' => 'admin@seeda.dev'],
+            [
+                'name' => 'Seeda Admin',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+                'is_active' => true,
+            ]
+        );
 
         // ── Services ──
         $services = [
@@ -660,6 +662,40 @@ class DatabaseSeeder extends Seeder
             // Update the lead score based on these interactions
             $firstLead->increment('score', 60);
             $firstLead->update(['priority' => 'high']);
+        }
+
+        // ── Email Templates ──
+        $template1 = \App\Models\EmailTemplate::create([
+            'name' => 'Initial Welcome Email',
+            'subject' => 'Welcome to Seeda, {{name}}! 🚀',
+            'content' => '<h1>Hi {{name}},</h1><p>Thanks for your interest in Seeda. We help companies like <strong>{{company}}</strong> scale with custom software.</p><p>Would you like to schedule a quick discovery call?</p><p>Best,<br>The Seeda Team</p>',
+            'category' => 'marketing',
+        ]);
+
+        $template2 = \App\Models\EmailTemplate::create([
+            'name' => 'Follow-up After Demo',
+            'subject' => 'Next steps for {{company}}',
+            'content' => '<h1>Hi {{name}},</h1><p>Great speaking with you today. As discussed, here is the modified proposal for {{company}}.</p><p>Let me know if you have any questions.</p>',
+            'category' => 'sales',
+        ]);
+
+        // ── Email Lists ──
+        $list1 = \App\Models\EmailList::create([
+            'name' => 'Tech Founders 2024',
+            'description' => 'Leads specifically from the tech sector',
+            'color' => '#10B981',
+        ]);
+
+        $list2 = \App\Models\EmailList::create([
+            'name' => 'Retargeting List',
+            'description' => 'Users who downloaded the pricing guide',
+            'color' => '#F59E0B',
+        ]);
+
+        // Add some subscribers to lists
+        $subs = \App\Models\NewsletterSubscriber::limit(5)->get();
+        foreach ($subs as $sub) {
+            $list1->subscribers()->attach($sub->id);
         }
     }
 }

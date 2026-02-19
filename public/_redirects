@@ -1,0 +1,3 @@
+/* Handle SPA routing — all paths serve index.html */
+/*  /assets/*  /assets/:splat  200
+/*  /index.html  200

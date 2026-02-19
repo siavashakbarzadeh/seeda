@@ -8,6 +8,9 @@ use App\Models\Lead;
 use App\Models\NewsletterSubscriber;
 use App\Models\SeoKeyword;
 use App\Models\SocialMediaPost;
+use App\Models\Partner;
+use App\Models\MarketingFunnel;
+use App\Models\PayoutLog;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -61,6 +64,13 @@ class MarketingStatsWidget extends StatsOverviewWidget
             ? round((($totalRevenue - $totalSpent) / $totalSpent) * 100, 1)
             : 0;
 
+        // Affiliates
+        $activePartners = Partner::active()->count();
+        $pendingPayouts = PayoutLog::pending()->sum('amount');
+
+        // Funnels
+        $totalFunnelConversions = MarketingFunnel::sum('conversions');
+
         return [
             Stat::make('New Leads (This Month)', $newLeads)
                 ->description($openLeads . ' in pipeline · ' . $hotLeads . ' 🔥 hot')
@@ -96,6 +106,16 @@ class MarketingStatsWidget extends StatsOverviewWidget
                 ->description($totalSubscribers . ' newsletter subscribers')
                 ->color($unreadMessages > 0 ? 'danger' : 'success')
                 ->icon('heroicon-o-inbox-arrow-down'),
+
+            Stat::make('Affiliates', $activePartners)
+                ->description('€' . number_format($pendingPayouts, 2) . ' pending payouts')
+                ->color('info')
+                ->icon('heroicon-o-users'),
+
+            Stat::make('Funnel Conversions', $totalFunnelConversions)
+                ->description('Leads from gated content')
+                ->color('success')
+                ->icon('heroicon-o-funnel'),
         ];
     }
 }

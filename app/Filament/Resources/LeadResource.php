@@ -208,6 +208,11 @@ class LeadResource extends Resource
                     ->hidden(fn(Lead $record) => in_array($record->status, ['won', 'lost'])),
 
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('view_lead')
+                    ->label('View')
+                    ->icon('heroicon-o-eye')
+                    ->color('info')
+                    ->url(fn(Lead $record) => static::getUrl('view', ['record' => $record])),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
@@ -262,6 +267,7 @@ class LeadResource extends Resource
             'index' => Pages\ListLeads::route('/'),
             'create' => Pages\CreateLead::route('/create'),
             'edit' => Pages\EditLead::route('/{record}/edit'),
+            'view' => Pages\ViewLead::route('/{record}'),
         ];
     }
 }
