@@ -5,17 +5,45 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use App\Models\CaseStudy;
 use App\Models\ContactMessage;
+use App\Models\Course;
+use App\Models\LandingSection;
 use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
 {
+    public function __construct()
+    {
+        // Set locale from query string or session
+        $locale = request()->query('lang', session('locale', config('app.locale')));
+        if (in_array($locale, ['en', 'it', 'fa'])) {
+            App::setLocale($locale);
+            session(['locale' => $locale]);
+        }
+    }
+
     public function home()
     {
+        $locale = App::getLocale();
+
+        // Get all landing sections keyed by their key
+        $sections = LandingSection::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get()
+            ->keyBy('key');
+
+        $courses = Course::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
         return view('pages.home', [
+            'sections' => $sections,
+            'courses' => $courses,
+            'locale' => $locale,
             'services' => Cache::remember('home.services', 3600, fn() => Service::active()->take(3)->get()),
             'featuredStudy' => Cache::remember('home.featured_study', 3600, fn() => CaseStudy::active()->featured()->first() ?? CaseStudy::active()->first()),
             'testimonials' => Cache::remember('home.testimonials', 3600, fn() => Testimonial::featured()->orderBy('sort_order')->take(3)->get()),
@@ -99,6 +127,21 @@ class PageController extends Controller
         ContactMessage::create($validated);
 
         return back()->with('success', 'Thank you! We\'ll get back to you within 24 hours.');
+    }
+
+    public function courses()
+    {
+        $courses = Course::where('is_active', true)->orderBy('sort_order')->get();
+        return view('pages.courses', compact('courses'));
+    }
+
+    public function courseDetail($slug)
+    {
+        $course = Course::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        $relatedCourses = Course::where('is_active', true)
+            ->where('id', '!=', $course->id)
+            ->take(3)->get();
+        return view('pages.course-detail', compact('course', 'relatedCourses'));
     }
 
     public function faq()

@@ -15,6 +15,8 @@ Route::post('/contact', [PageController::class, 'contactSubmit'])->name('contact
 Route::get('/blog', [PageController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [PageController::class, 'blogPost'])->name('blog.post');
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
+Route::get('/courses', [PageController::class, 'courses'])->name('courses');
+Route::get('/courses/{slug}', [PageController::class, 'courseDetail'])->name('course.detail');
 Route::post('/newsletter', [PageController::class, 'newsletterSubscribe'])->name('newsletter.subscribe');
 
 // SEO

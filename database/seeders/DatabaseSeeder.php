@@ -1130,5 +1130,8 @@ class DatabaseSeeder extends Seeder
         foreach ($subs as $sub) {
             $list1->subscribers()->attach($sub->id);
         }
+
+        // ── Landing Page Content & Courses ──
+        $this->call(LandingContentSeeder::class);
     }
 }
