@@ -21,6 +21,7 @@ Route::post('/newsletter', [PageController::class, 'newsletterSubscribe'])->name
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Auth
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+// We use Filament's default login so these are removed
+// Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+// Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

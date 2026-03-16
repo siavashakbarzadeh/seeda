@@ -34,7 +34,7 @@
         <li><a href="#testimonials" data-en="Reviews" data-it="Recensioni">Reviews</a></li>
         <li><a href="#pricing" data-en="Pricing" data-it="Prezzi">Pricing</a></li>
         <li><a href="#contact" class="nav-cta" data-en="Contact Us" data-it="Contattaci">Contact Us</a></li>
-        <li><a href="{{ route('login') }}" class="nav-cta" style="background: var(--gradient-3);" data-en="Login" data-it="Accedi">Login</a></li>
+        <li><a href="{{ route('filament.admin.auth.login') }}" class="nav-cta" style="background: var(--gradient-3);" data-en="Login" data-it="Accedi">Login</a></li>
         <li>
           <button class="lang-switcher" id="langSwitcher" onclick="toggleLanguage()">
             <span class="lang-flag" id="langFlag">🇬🇧</span>
