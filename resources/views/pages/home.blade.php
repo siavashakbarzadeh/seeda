@@ -145,10 +145,7 @@
     </section>
 
     {{-- Portfolio Showcase --}}
-    @php
-        $portfolioStudies = \App\Models\CaseStudy::active()->featured()->take(4)->get();
-    @endphp
-    @if ($portfolioStudies->isNotEmpty())
+    @if (isset($portfolioStudies) && $portfolioStudies->isNotEmpty())
         <section class="py-16 md:py-24 bg-neutral-50">
             <div class="max-w-[1200px] mx-auto px-4 md:px-8">
                 <div class="text-center mb-12 fade-in">
@@ -246,17 +243,17 @@
                             </p>
 
                             <div class="flex items-center gap-3">
-                                @if($testimonial->avatar)
-                                    <img src="{{ asset('storage/' . $testimonial->avatar) }}" alt="{{ $testimonial->client_name }}"
+                                @if($testimonial->photo)
+                                    <img src="{{ asset('storage/' . $testimonial->photo) }}" alt="{{ $testimonial->name }}"
                                          class="w-10 h-10 rounded-full object-cover">
                                 @else
                                     <div class="w-10 h-10 rounded-full bg-primary-bg text-primary font-bold text-sm flex items-center justify-center">
-                                        {{ substr($testimonial->client_name, 0, 1) }}
+                                        {{ substr($testimonial->name, 0, 1) }}
                                     </div>
                                 @endif
                                 <div>
-                                    <p class="text-sm font-semibold text-neutral-900">{{ $testimonial->client_name }}</p>
-                                    <p class="text-xs text-neutral-400">{{ $testimonial->position }}{{ $testimonial->company ? ', ' . $testimonial->company : '' }}</p>
+                                    <p class="text-sm font-semibold text-neutral-900">{{ $testimonial->name }}</p>
+                                    <p class="text-xs text-neutral-400">{{ $testimonial->role }}{{ $testimonial->company ? ', ' . $testimonial->company : '' }}</p>
                                 </div>
                             </div>
                         </div>

@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('project_id')->nullable()->constrained()->nullOnDelete();
-            $table->enum('category', ['software', 'hardware', 'hosting', 'domain', 'marketing', 'travel', 'office', 'subscription', 'freelancer', 'other'])->default('other');
+            $table->enum('category', ['software', 'hardware', 'hosting', 'domain', 'marketing', 'travel', 'office', 'subscription', 'freelancer', 'training', 'other'])->default('other');
             $table->string('description');
             $table->decimal('amount', 12, 2);
             $table->date('date');

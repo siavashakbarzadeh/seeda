@@ -8,7 +8,10 @@
         content="@yield('meta_description', 'Seeda — Boutique software consulting. Custom development, AI, cloud, and digital products.')">
     <title>@yield('title', 'Seeda — Software Consulting')</title>
     <link rel="icon" href="{{ asset('seeda-icon.svg') }}" type="image/svg+xml">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 

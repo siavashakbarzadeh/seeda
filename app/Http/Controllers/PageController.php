@@ -9,16 +9,17 @@ use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
 {
     public function home()
     {
         return view('pages.home', [
-            'services' => Service::active()->take(3)->get(),
-            'featuredStudy' => CaseStudy::active()->featured()->first()
-                ?? CaseStudy::active()->first(),
-            'testimonials' => Testimonial::featured()->orderBy('sort_order')->take(3)->get(),
+            'services' => Cache::remember('home.services', 3600, fn() => Service::active()->take(3)->get()),
+            'featuredStudy' => Cache::remember('home.featured_study', 3600, fn() => CaseStudy::active()->featured()->first() ?? CaseStudy::active()->first()),
+            'testimonials' => Cache::remember('home.testimonials', 3600, fn() => Testimonial::featured()->orderBy('sort_order')->take(3)->get()),
+            'portfolioStudies' => Cache::remember('home.portfolio', 3600, fn() => CaseStudy::active()->featured()->take(4)->get()),
             'stats' => [
                 ['value' => '50+', 'label' => 'Projects Delivered'],
                 ['value' => '98%', 'label' => 'Client Satisfaction'],
@@ -30,34 +31,36 @@ class PageController extends Controller
     public function services()
     {
         return view('pages.services', [
-            'services' => Service::active()->get(),
+            'services' => Cache::remember('page.services', 3600, fn() => Service::active()->get()),
         ]);
     }
 
     public function caseStudies(Request $request)
     {
         $category = $request->query('category');
-        $categories = CaseStudy::active()
-            ->distinct()
-            ->pluck('category')
-            ->sort()
-            ->values();
+        $cacheKey = 'page.case_studies.' . ($category ?? 'all');
 
-        $studies = CaseStudy::active()
-            ->when($category, fn($q) => $q->byCategory($category))
-            ->get();
+        $data = Cache::remember($cacheKey, 3600, function () use ($category) {
+            $categories = CaseStudy::active()
+                ->distinct()
+                ->pluck('category')
+                ->sort()
+                ->values();
 
-        return view('pages.case-studies', [
-            'studies' => $studies,
-            'categories' => $categories,
-            'active' => $category,
-        ]);
+            $studies = CaseStudy::active()
+                ->when($category, fn($q) => $q->byCategory($category))
+                ->get();
+
+            return compact('categories', 'studies');
+        });
+
+        return view('pages.case-studies', array_merge($data, ['active' => $category]));
     }
 
     public function about()
     {
         return view('pages.about', [
-            'team' => TeamMember::active()->get(),
+            'team' => Cache::remember('page.about.team', 3600, fn() => TeamMember::active()->get()),
         ]);
     }
 
@@ -100,7 +103,7 @@ class PageController extends Controller
 
     public function faq()
     {
-        $faqs = \App\Models\Faq::published()->orderBy('sort_order')->get();
+        $faqs = Cache::remember('page.faq', 3600, fn() => \App\Models\Faq::published()->orderBy('sort_order')->get());
         $categories = $faqs->pluck('category')->unique()->filter()->values();
 
         return view('pages.faq', compact('faqs', 'categories'));
@@ -120,4 +123,3 @@ class PageController extends Controller
         return back()->with('success', 'Thanks for subscribing to our newsletter!');
     }
 }
-
